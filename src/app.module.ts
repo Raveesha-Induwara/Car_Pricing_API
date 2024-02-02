@@ -9,11 +9,11 @@ import { Report } from './reports/report.entity';
 import { User } from './users/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [TypeOrmModule.forRoot({ // forRoot() method supports all the configuration properties
     type: 'sqlite',
     database: 'db.sqlite',
-    entities: [User, Report],     // add created entities
-    synchronize: true,
+    entities: [User, Report],       // add created entities
+    synchronize: true,              // Setting synchronize: true shouldn't be used in production and only for use development.
   }),
     UsersModule, ReportsModule],
   controllers: [AppController],
