@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 import { User } from './user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],    // this step create repository for us
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [UsersService]
 })
