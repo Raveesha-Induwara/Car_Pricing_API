@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Q
 import { CreateUserDto } from './dtos/create-users.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-users.dto';
-import { SerializerInterceptor } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 
 @Controller('auth')
@@ -17,7 +17,8 @@ export class UsersController {
         this.usersService.create(body.email, body.password);
     }
 
-    @UseInterceptors(new SerializerInterceptor(UserDto))
+    //@UseInterceptors(new SerializerInterceptor(UserDto))
+    @Serialize(UserDto) // custom decorator
     @Get('/:id')
     async findUser(@Param('id') id: string){
         console.log('handler is running');
@@ -42,5 +43,4 @@ export class UsersController {
     removeUser(@Param('id') id: string){
         return this.usersService.remove(parseInt(id));
     }
-
 }
